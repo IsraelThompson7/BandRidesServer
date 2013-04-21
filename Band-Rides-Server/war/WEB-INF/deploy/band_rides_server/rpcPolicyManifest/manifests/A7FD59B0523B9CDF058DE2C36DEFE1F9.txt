@@ -1,0 +1,2 @@
+serviceClass: com.catglo.bandridesserver.client.GreetingService
+path: 833AC46627128BA88FD55158B5702C34.gwt.rpc

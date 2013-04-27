@@ -4,6 +4,7 @@ package com.catglo.bandridesserver;
 
 import java.util.Random;
 
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -14,7 +15,7 @@ import com.google.gson.Gson;
 
 
 @PersistenceCapable	
-public class User extends DataBaseModel {
+public class User {
 	@Persistent public String name;
 	@Persistent public String cell;
 	@Persistent public String email;
@@ -26,7 +27,7 @@ public class User extends DataBaseModel {
 	@Persistent public String generatedKey;
 	
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	@PrimaryKey Long id;
+	@PrimaryKey Long userID;
 	
 	public User(HttpServletRequest request){
 		name = request.getParameter("name");
@@ -68,4 +69,19 @@ public class User extends DataBaseModel {
     	return gson.fromJson(json, User.class);
     }
      
+    public String toJson() {
+    	Gson gson = new Gson();
+    	String json = gson.toJson(this);
+    	return json;
+    }
+	
+	public void makePersistant(){
+	    PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            pm.makePersistent(this);
+        } finally {
+            pm.close();
+
+        }   
+	}
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable	
-public class Show extends DataBaseModel {
+public class Show  {
 	@Persistent public Calendar date;
 	@Persistent public String address;
 	@Persistent public String city;

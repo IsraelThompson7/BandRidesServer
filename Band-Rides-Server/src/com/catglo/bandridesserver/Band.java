@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.gson.Gson;
 
 @PersistenceCapable	
-public class Band extends DataBaseModel 
+public class Band  
 {
 	@Persistent public String name;
 	@Persistent public String description;
@@ -47,5 +48,21 @@ public class Band extends DataBaseModel
 		soundcloud = request.getParameter("soundcloud");
 		YouTube = request.getParameter("YouTube");
 		imageURL = request.getParameter("imageURL");
+	}
+	
+	public String toJson() {
+    	Gson gson = new Gson();
+    	String json = gson.toJson(this);
+    	return json;
+    }
+	
+	public void makePersistant(){
+	    PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            pm.makePersistent(this);
+        } finally {
+            pm.close();
+
+        }   
 	}
 }

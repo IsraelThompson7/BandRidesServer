@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.gson.Gson;
 
 @PersistenceCapable	
 public class Show  {
@@ -59,5 +60,21 @@ public class Show  {
 			longitude = 0;
 			latitude = 0;
 		}
+	}
+	
+	public String toJson() {
+    	Gson gson = new Gson();
+    	String json = gson.toJson(this);
+    	return json;
+    }
+	
+	public void makePersistant(){
+	    PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            pm.makePersistent(this);
+        } finally {
+            pm.close();
+
+        }   
 	}
 }

@@ -27,7 +27,26 @@
 		<url-pattern>/user.php</url-pattern>
 	</servlet-mapping>
   
-
+  	<servlet>
+		<servlet-name>band</servlet-name>
+		<servlet-class>com.catglo.bandridesserver.NewBandServlet</servlet-class>
+	</servlet>
+	
+  	<servlet-mapping>
+		<servlet-name>band</servlet-name>
+		<url-pattern>/index.php</url-pattern>
+	</servlet-mapping>
+  
+	<servlet>
+		<servlet-name>show</servlet-name>
+		<servlet-class>com.catglo.bandridesserver.NewShowServlet</servlet-class>
+	</servlet>
+	
+  	<servlet-mapping>
+		<servlet-name>show</servlet-name>
+		<url-pattern>/show.php</url-pattern>
+	</servlet-mapping>
+  
   
   
   

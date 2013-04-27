@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 
-@PersistenceCapable	
+@PersistenceCapable(detachable="true")
 public class Band  
 {
 	@Persistent public String name;
@@ -41,13 +41,30 @@ public class Band
         return band;
 	}
 	
+	public void update(HttpServletRequest request)
+	{
+		String temp = request.getParameter("name");
+		if (temp != null) name = temp;
+		
+		temp = request.getParameter("description");
+		if (temp != null) description = temp;
+				
+		temp = request.getParameter("imageUrl");
+		if (temp != null) imageUrl = temp;
+		
+		temp = request.getParameter("soundcloud");
+		if (temp != null) soundcloud = temp;
+		
+		temp = request.getParameter("YouTube");
+		if (temp!=null) YouTube = temp;
+		
+		temp = request.getParameter("imageURL");
+		if (temp!=null) imageURL=temp;
+		
+	}
+	
 	public Band(HttpServletRequest request){
-		name = request.getParameter("name");
-		description = request.getParameter("description");
-		imageUrl = request.getParameter("imageUrl");
-		soundcloud = request.getParameter("soundcloud");
-		YouTube = request.getParameter("YouTube");
-		imageURL = request.getParameter("imageURL");
+		update(request);
 	}
 	
 	public String toJson() {
